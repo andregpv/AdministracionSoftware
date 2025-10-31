@@ -3,21 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculadora Básica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 8px;
+            width: 80%;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .resultado {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-<h2>Calculadora</h2>
-<form action="/calcular" method="post">
-    <input type="number" name="a" placeholder="Primer número" step="any" required><br>
-    <input type="number" name="b" placeholder="Segundo número" step="any" required><br>
-    <select name="operacion" required>
-        <option value="sumar">Sumar</option>
-        <option value="restar">Restar</option>
-        <option value="multiplicar">Multiplicar</option>
-        <option value="dividir">Dividir</option>
-    </select><br>
-    <button type="submit">Calcular</button>
-</form>
+<div class="container">
+    <h2>Calculadora Básica</h2>
+    <form th:action="@{/calcular}" method="post">
+        <input type="number" name="a" placeholder="Primer número" step="any" required><br>
+        <input type="number" name="b" placeholder="Segundo número" step="any" required><br>
+        <select name="operacion" required>
+            <option value="sumar">Sumar</option>
+            <option value="restar">Restar</option>
+            <option value="multiplicar">Multiplicar</option>
+            <option value="dividir">Dividir</option>
+        </select><br>
+        <button type="submit">Calcular</button>
+    </form>
 
-<p th:text="${mensaje}"></p>
+    <div class="resultado">
+        <p th:text="${mensaje}">Introduce los valores y selecciona una operación</p>
+    </div>
+</div>
 </body>
 </html>

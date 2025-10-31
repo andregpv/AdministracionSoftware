@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.service.CalculatorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CalculatorController {
@@ -15,19 +17,21 @@ public class CalculatorController {
     }
 
     @GetMapping("/")
-    public String index() {
-        return "calculator"; // ← nombre del HTML en /resources/templates/
+    public String index(Model model) {
+        model.addAttribute("mensaje", "");
+        return "calculator";
     }
 
     @PostMapping("/calcular")
-    public String calcular(@RequestParam double a,
-                           @RequestParam double b,
-                           @RequestParam String operacion,
+    public String calcular(@RequestParam("a") double a,
+                           @RequestParam("b") double b,
+                           @RequestParam("operacion") String operacion,
                            Model model) {
-        double resultado = 0;
+
         String mensaje;
 
         try {
+            double resultado;
             switch (operacion) {
                 case "sumar":
                     resultado = calculatorService.sumar(a, b);
@@ -50,6 +54,6 @@ public class CalculatorController {
         }
 
         model.addAttribute("mensaje", mensaje);
-        return "calculator"; // ← debe coincidir con el HTML
+        return "calculator";
     }
 }
